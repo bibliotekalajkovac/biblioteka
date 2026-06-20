@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteka Bar — Cenovnik 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: #8a6e2f;
+      --bg-dark: #0d0d1a;
+      --bg-card: #12112a;
+      --bg-section: #0f0e20;
+      --text: #d8d4e8;
+      --text-muted: #9490b0;
+      --border: rgba(201, 168, 76, 0.2);
+      --divider: rgba(201, 168, 76, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── background glow ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center,
+        rgba(80, 40, 140, 0.35) 0%,
+        rgba(40, 20, 80, 0.15) 50%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 50px;
+      z-index: 1;
+    }
+
+    .logo-symbol {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.4);
+    }
+
+    .logo-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+      display: block;
+    }
+
+    .logo-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .hero-line {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px auto 0;
+    }
+
+    /* ── sticky nav ── */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 13, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .nav-bar::-webkit-scrollbar { display: none; }
+
+    .nav-bar ul {
+      display: inline-flex;
+      list-style: none;
+      gap: 0;
+      padding: 0;
+    }
+
+    .nav-bar a {
+      display: inline-block;
+      padding: 14px 18px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-bar a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold-dim);
+    }
+
+    /* ── main layout ── */
+    .menu-container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── section ── */
+    .menu-section {
+      margin-top: 56px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 1px;
+      background: var(--gold-dim);
+    }
+    .section-title::before { right: 100%; }
+    .section-title::after  { left: 100%; }
+
+    /* ── items ── */
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 16px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+    .item:hover {
+      background: rgba(201, 168, 76, 0.05);
+    }
+
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(201, 168, 76, 0.2);
+      margin-bottom: 3px;
+      min-width: 20px;
+    }
+
+    .item-name {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .item-name .volume {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .item-price {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      white-space: nowrap;
+      font-weight: 400;
+    }
+
+    /* ── two-column layout for wide screens ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 48px;
+    }
+
+    .col-divider {
+      border: none;
+      border-left: 1px solid var(--divider);
+    }
+
+    /* ── page divider ── */
+    .page-break {
+      margin: 64px auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--gold-dim), var(--border), transparent);
+    }
+
+    /* ── instagram footer ── */
+    .footer {
+      margin-top: 72px;
+      padding: 32px 20px 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .footer a:hover { color: var(--gold); }
+
+    .ig-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ig-icon svg { width: 16px; height: 16px; fill: white; }
+
+    /* ── responsive ── */
+    @media (max-width: 640px) {
+      .two-col { grid-template-columns: 1fr; gap: 0; }
+      .col-divider { display: none; }
+      .section-title::before,
+      .section-title::after { width: 20px; }
+      .nav-bar a { padding: 12px 12px; font-size: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="logo-symbol">&#120121;</div>
+    <span class="logo-name">BIBLIOTEKA</span>
+    <span class="logo-sub">BAR</span>
+    <div class="hero-line"></div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <ul>
+      <li><a href="#juices">Juices</a></li>
+      <li><a href="#water">Water</a></li>
+      <li><a href="#beer">Beer</a></li>
+      <li><a href="#white-wine">White Wine</a></li>
+      <li><a href="#red-wine">Red Wine</a></li>
+      <li><a href="#rose">Rosé</a></li>
+      <li><a href="#whisky">Whisky</a></li>
+      <li><a href="#vodka">Vodka</a></li>
+      <li><a href="#tequila">Tequila</a></li>
+      <li><a href="#likeri">Likeri</a></li>
+      <li><a href="#gin">Gin</a></li>
+      <li><a href="#cider">Cider</a></li>
+      <li><a href="#rakija">Rakija</a></li>
+      <li><a href="#mixed">Mešana Pića</a></li>
+    </ul>
+  </nav>
+
+  <main class="menu-container">
+
+    <!-- ══════════════════════════ PAGE 1 ══════════════════════════ -->
+
+    <div class="two-col">
+
+      <!-- LEFT: Juices, Water, Beer -->
+      <div>
+
+        <section class="menu-section" id="juices">
+          <div class="section-header">
+            <span class="section-title">Juices</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Coca Cola <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Fanta <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Sprite <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Schweppes biter <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Schweppes tonic <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">GUSTO pomorandža <span class="volume">0,2l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">GUSTO borovnica <span class="volume">0,2l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">GUSTO jabuka <span class="volume">0,2l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Guarana <span class="volume">0,25l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Red Bull <span class="volume">0,25l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">280,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="water">
+          <div class="section-header">
+            <span class="section-title">Water</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Aqua Viva negazirana <span class="volume">0,25l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">130,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Knjaz Miloš <span class="volume">0,25l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">130,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Knjaz Miloš <span class="volume">0,75l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">200,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="beer">
+          <div class="section-header">
+            <span class="section-title">Beer</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Heineken <span class="volume">0,25l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">280,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Blanc 1664 <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">250,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Tuborg <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">250,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="col-divider"></div>
+
+      <!-- RIGHT: Wines -->
+      <div>
+
+        <section class="menu-section" id="white-wine">
+          <div class="section-header">
+            <span class="section-title">White Wine</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Rubin Chardonnay <span class="volume">0,187L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">240,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Rubin Chardonnay <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">1.200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Zvonko Bogdan 8 Tamburaša <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">2.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="red-wine">
+          <div class="section-header">
+            <span class="section-title">Red Wine</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Rubin Cabernet Sauvignon <span class="volume">0,187L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">240,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Rubin Cabernet Sauvignon <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">1.200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Zvonko Bogdan Život Teče <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">2.400,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="rose">
+          <div class="section-header">
+            <span class="section-title">Rosé</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Rubin Rose <span class="volume">0,187L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">240,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Rubin Rose <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">1.200,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Kovačević Rosetto <span class="volume">0,75L</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">2.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════ PAGE 2 ══════════════════════════ -->
+    <div class="page-break"></div>
+
+    <div class="two-col">
+
+      <!-- LEFT: Whisky, Vodka, Tequila, Likeri -->
+      <div>
+
+        <section class="menu-section" id="whisky">
+          <div class="section-header">
+            <span class="section-title">Whisky</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Johnie Walker Red <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">230,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Johnie Walker Red <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">4.000,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Jack Daniels <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">280,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Jack Daniels <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">6.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="vodka">
+          <div class="section-header">
+            <span class="section-title">Vodka</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Smirnoff <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">180,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Smirnoff <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">4.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="tequila">
+          <div class="section-header">
+            <span class="section-title">Tequila</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Sierra Silver <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">170,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Sierra Silver <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">4.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="likeri">
+          <div class="section-header">
+            <span class="section-title">Likeri</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Jägermeister <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">230,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Jägermeister <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">4.000,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Gorki List <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">160,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Gorki List <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">3.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="col-divider"></div>
+
+      <!-- RIGHT: Gin, Cider, Rakija, Mešana Pića -->
+      <div>
+
+        <section class="menu-section" id="gin">
+          <div class="section-header">
+            <span class="section-title">Gin</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Beefeater <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">170,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Beefeater <span class="volume">0,7l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">4.000,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="cider">
+          <div class="section-header">
+            <span class="section-title">Cider</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Somersby Apple <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">280,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Somersby Blueberry <span class="volume">0,33l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">280,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="rakija">
+          <div class="section-header">
+            <span class="section-title">Rakija</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Šljiva <span class="volume">0,03l</span></span>
+              <span class="item-dots"></span>
+              <span class="item-price">150,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="menu-section" id="mixed">
+          <div class="section-header">
+            <span class="section-title">Mešana Pića</span>
+          </div>
+          <div class="items">
+            <div class="item">
+              <span class="item-name">Džin Tonik</span>
+              <span class="item-dots"></span>
+              <span class="item-price">180,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Džin Biter</span>
+              <span class="item-dots"></span>
+              <span class="item-price">180,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Vodka Đus</span>
+              <span class="item-dots"></span>
+              <span class="item-price">180,00 din.</span>
+            </div>
+            <div class="item">
+              <span class="item-name">Vodka Borovnica</span>
+              <span class="item-dots"></span>
+              <span class="item-price">180,00 din.</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="https://www.instagram.com/biblioteka_bar_kolubara" target="_blank" rel="noopener">
+      <span class="ig-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </span>
+      biblioteka_bar_kolubara
+    </a>
+  </footer>
+
+</body>
+</html>
