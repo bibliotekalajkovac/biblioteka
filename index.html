@@ -286,6 +286,47 @@
     }
     .ig-icon svg { width: 16px; height: 16px; fill: white; }
 
+    /* ── scroll to top button ── */
+    .scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 20px;
+      z-index: 200;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-dim);
+      background: rgba(13, 13, 26, 0.92);
+      backdrop-filter: blur(10px);
+      color: var(--gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.25s, transform 0.25s, background 0.2s;
+    }
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .scroll-top:hover {
+      background: rgba(201, 168, 76, 0.15);
+      border-color: var(--gold);
+    }
+    .scroll-top svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     /* ── desktop: two-column layout ── */
     @media (min-width: 768px) {
       .hero { padding: 60px 20px 50px; }
@@ -719,6 +760,11 @@
 
   </main>
 
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <!-- FOOTER -->
   <footer class="footer">
     <a href="https://www.instagram.com/biblioteka_bar_kolubara" target="_blank" rel="noopener">
@@ -732,6 +778,12 @@
   </footer>
 
   <script>
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
     const navLinks = document.querySelectorAll('.nav-bar a[href^="#"]');
     const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
 
